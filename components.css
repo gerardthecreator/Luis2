@@ -1,0 +1,239 @@
+/* ==========================================================================
+   Controles de Selección de Ejercicios
+   ========================================================================== */
+
+.controls {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0; /* Separador visual sutil */
+    padding-bottom: 20px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.btn-ejercicio {
+    font-family: var(--font-body);
+    font-weight: 700;
+    padding: 8px 15px;
+    border: 2px solid var(--color-accent);
+    background-color: transparent;
+    color: var(--color-accent);
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem; /* 14.4px */
+    transition: all 0.2s ease-out;
+}
+
+.btn-ejercicio:hover {
+    background-color: var(--color-accent);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+}
+
+.btn-ejercicio.active {
+    background-color: var(--color-accent);
+    color: white;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2); /* Efecto presionado */
+    transform: translateY(0);
+}
+
+.btn-ejercicio:disabled {
+    border-color: #ccc;
+    color: #ccc;
+    cursor: not-allowed;
+    background-color: transparent;
+    transform: none;
+    box-shadow: none;
+}
+
+
+/* ==========================================================================
+   Visualización SVG y Elementos del Tutorial
+   ========================================================================== */
+
+#svg-container {
+    width: 100%;
+    margin: 20px 0;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fdfdfd;
+}
+
+svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* --- Elementos dentro del SVG --- */
+.grid-line { stroke: #eee; stroke-width: 1; }
+.axis { stroke: #555; stroke-width: 2; }
+.tick-label { font-family: 'Oswald', sans-serif; font-size: 0.875rem; fill: #666; user-select: none; }
+.vertical-line { stroke: #333; stroke-width: 1.5; stroke-dasharray: 4 4; animation: pulse-shadow 2s infinite; }
+
+@keyframes pulse-shadow {
+    0% { filter: drop-shadow(0 0 1px rgba(0,0,0,0.4)); }
+    50% { filter: drop-shadow(0 0 4px rgba(0,0,0,0.8)); }
+    100% { filter: drop-shadow(0 0 1px rgba(0,0,0,0.4)); }
+}
+
+.height-line { stroke-width: 3; opacity: 0.9; }
+.sum-point { stroke: white; stroke-width: 2; transition: all 0.3s ease; }
+.persistent-point { opacity: 0.6; }
+
+#sum-curve {
+    stroke-width: 3.5;
+    fill: none;
+    stroke-dasharray: 3000;
+    stroke-dashoffset: 3000;
+    transition: stroke-dashoffset 4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+#sum-curve.visible {
+    stroke-dashoffset: 0;
+}
+
+.curve { fill: none; stroke-width: 2.5; transition: opacity 0.5s ease, stroke-width 0.3s ease; }
+.curve.highlight { stroke-width: 4.5; filter: drop-shadow(0 0 5px currentColor); }
+.curve.faded { opacity: 0.3; }
+
+
+/* ==========================================================================
+   Paneles de Explicación y Cálculo
+   ========================================================================== */
+
+#explanation { 
+    min-height: 60px; 
+    font-size: 1.05rem; /* 16.8px */
+    line-height: 1.65; 
+    font-weight: 300; 
+    transition: opacity 0.5s ease; 
+}
+
+#explanation p { margin: 10px 0; }
+#explanation strong { font-weight: 700; color: var(--color-header); }
+
+#calculation-display { 
+    background-color: var(--color-calculation-bg); 
+    border-radius: 8px; 
+    padding: 1rem 1.5rem;
+    margin: 20px auto;
+    max-width: 90%;
+    font-size: 1.2rem; /* 19.2px */
+    font-weight: 400; 
+    transition: opacity 0.5s ease, transform 0.5s ease; 
+    transform: translateY(10px); 
+    opacity: 0; 
+    visibility: hidden;
+    border: 1px solid #d6d8db;
+}
+
+#calculation-display.visible {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- Layout del cálculo con Flexbox --- */
+.calculation-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem 1rem;
+    text-align: center;
+}
+
+.formula-part, .values-part {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.values-part span {
+    font-weight: 700;
+}
+
+.highlight-f1 { color: var(--color-f1); }
+.highlight-f2 { color: var(--color-f2); }
+.highlight-sum { color: var(--color-sum); }
+
+
+/* ==========================================================================
+   Botones de Navegación del Tutorial
+   ========================================================================== */
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+    visibility: hidden;
+}
+
+.nav-button { 
+    font-family: var(--font-header); 
+    font-size: 1.1rem; /* 17.6px */
+    padding: 12px 25px; 
+    border: none; 
+    border-radius: 8px; 
+    background-color: var(--color-accent); 
+    color: white; 
+    cursor: pointer; 
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+    transition: all 0.2s ease-out;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2); 
+}
+
+.nav-button:hover:not(:disabled) { 
+    background-color: #0056b3; 
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 86, 179, 0.3);
+}
+
+.nav-button:disabled { 
+    background-color: #ccc; 
+    cursor: not-allowed; 
+    box-shadow: none; 
+    transform: none; 
+}
+
+
+/* ==========================================================================
+   Ajustes para Dispositivos Móviles (≤ 540px)
+   ========================================================================== */
+
+@media (max-width: 540px) {
+    #explanation {
+        font-size: 0.95rem; /* 15.2px */
+        line-height: 1.6;
+    }
+
+    #calculation-display {
+        font-size: 1.1rem; /* 17.6px */
+        max-width: 100%;
+        padding: 0.8rem;
+    }
+    
+    .calculation-container {
+        gap: 0.2rem 0.5rem; /* Menos espacio en móvil */
+    }
+
+    .nav-button {
+        font-size: 1rem; /* 16px */
+        padding: 10px 20px;
+    }
+
+    /* Desactivar efectos de hover en dispositivos táctiles para evitar "sticky hover" */
+    .nav-button:hover, .btn-ejercicio:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}

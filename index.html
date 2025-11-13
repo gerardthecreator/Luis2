@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayudando al Pana Luis - Suma de Curvas</title>
+
+    <!-- Google Fonts: Anton & Oswald -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- MathJax V3 -->
+    <script>
+        MathJax = {
+          tex: { inlineMath: [['$', '$']] },
+          svg: { fontCache: 'global' }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="components.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <img src="logo.jpg" alt="Logo" class="logo">
+        <h1>Ayudando al Pana Luis</h1>
+    </header>
+
+    <main class="content-wrapper">
+        <div class="controls">
+            <h2>Ejercicios</h2>
+            <div class="button-group">
+                <button id="btn-ej1" class="btn-ejercicio">Ejercicio 1: Parábolas</button>
+                <button id="btn-ej2" class="btn-ejercicio">Ejercicio 2: Hipérbola + Recta</button>
+                <button id="btn-ej3" class="btn-ejercicio" >Ejercicio 3</button>
+            </div>
+        </div>
+
+        <div id="explanation">
+            <p>Selecciona un ejercicio para comenzar el tutorial interactivo.</p>
+        </div>
+        
+        <div id="calculation-display"></div>
+
+        <div id="svg-container">
+            <svg id="main-svg" viewBox="0 0 800 600" xmlns="http://www.w.org/2000/svg">
+              <g id="cartesian-plane"></g>
+              <g id="curves-group"></g>
+              <g id="persistent-elements"></g>
+              <g id="tutorial-elements"></g>
+            </svg>
+        </div>
+
+        <div class="navigation">
+            <button id="prev-step" class="nav-button">Anterior</button>
+            <button id="next-step" class="nav-button">Siguiente</button>
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script src="ejercicio1.js"></script>
+    <script src="ejercicio2.js"></script>
+    <script src="ejercicio3.js"></script>
+    <script src="main.js"></script>
+
+</body>
+</html>
